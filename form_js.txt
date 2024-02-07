@@ -1,0 +1,61 @@
+### Test Notes for form.js
+
+#### Objective:
+- Validate the functionality and logic of the JavaScript file `form.js`, which manages dynamic behavior and interaction logic for the form page.
+
+#### Test Scope:
+- Test the functions and event handlers within `form.js` to ensure they perform as intended based on user interactions.
+
+#### Test Cases:
+
+1. **Clamp Function (`clamp()`):**
+   - Input: Minimum, maximum, and a value within range
+   - Expected Output: Value within the specified range
+
+2. **Show/Hide Option Functions (`hide_option()` and `show_option()`):**
+   - Input: Form ID
+   - Expected Output: Corresponding form element hidden/shown
+
+3. **Attribute ID Retrieval Function (`get_form_id()`):**
+   - Input: Attribute name
+   - Expected Output: Full HTML form ID
+
+4. **Change Handler Registration Function (`register_handler()`):**
+   - Input: Attribute ID and handler function
+   - Expected Output: Handler function attached to the attribute
+
+5. **`fix_num_cores()` Function:**
+   - Input: Node type selection
+   - Expected Output: Proper adjustment of the number of cores based on node type
+
+6. **`set_ppn_by_node_type()` Function:**
+   - Input: Node type selection
+   - Expected Output: Proper setting of 'per-process number' of cores based on node type
+
+7. **Toggle Visibility of Advanced Options (`toggle_visibility_of_advanced_options()`):**
+   - Input: 'advanced_options' checkbox value
+   - Expected Output: Visibility of advanced options toggled based on checkbox state
+
+8. **Hide Advanced Options When Not Needed (`toggle_advanced_options_visibility()`):**
+   - Input: Advanced fields' IDs
+   - Expected Output: Advanced options hidden when not required
+
+9. **Event Handlers Setup:**
+   - Input: Simulated changes in 'node_type', 'advanced_options', and 'jupyter_location'
+   - Expected Output: Corresponding UI changes based on the events triggered
+
+#### Notes:
+- Verify the proper execution of each function and event handler to ensure they interact as expected with the form elements.
+- Test edge cases, such as boundary values for clamping, to ensure the functions handle them correctly.
+- Check for synchronization between user inputs and UI changes.
+
+#### Recommendations:
+- Thoroughly test each function and event handler to confirm their responsiveness to different user interactions.
+- Validate the compatibility of these functions with the actual form elements used in the application.
+- Ensure that custom event handlers, if added, are correctly integrated and functioning as intended.
+
+link for the lib  : https://jestjs.io/
+
+
+
+

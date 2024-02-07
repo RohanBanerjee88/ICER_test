@@ -1,0 +1,24 @@
+cluster: "hpcc"
+form:
+  - modules
+  - is_vnc
+  - bc_num_hours
+  - num_cores
+  - memory
+
+attributes:
+  is_vnc: true
+  modules: "python/3.12"
+  bc_num_hours: "4"
+  num_cores:
+    widget: "number_field"
+    label: "Number of Cores"
+    value: 1
+    min: 1
+    max: 8
+    step: 1
+  memory:
+    widget: "text_field"
+    label: "Memory"
+    help: "e.g. 4GB or 8192MB"
+    pattern: "[0-9]+([gG][bB]|[mM][bB])"

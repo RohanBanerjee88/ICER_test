@@ -1,0 +1,30 @@
+# This is the before file for your app!
+# This file is executed before your app is started.
+# By default, this file will
+# - Export the module function
+# - If the app is not VNC:
+#   - Generate a port to use
+#   - Generate a password to use
+# You should also generate a config file for your app here,
+# and then load it in the start file.
+
+# Export the module function if it exists
+[[ $(type -t module) == "function" ]] && export -f module
+
+<% if context.is_vnc == 'true' -%>
+
+<% else -%>
+# Find available port to run server on
+port=$(find_port ${host})
+
+# Generate SHA1 encrypted password (requires OpenSSL installed)
+SALT="$(create_passwd 16)"
+password="$(create_passwd 16)"
+PASSWORD_SHA1="$(echo -n "${password}${SALT}" | openssl dgst -sha1 | awk '{print $NF}')"
+
+# Below, you should use the port and password
+# generated above to create a config file for your application.
+
+# ?[Add necessary before code]?
+
+<% end -%>

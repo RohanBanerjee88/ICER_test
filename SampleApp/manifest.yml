@@ -1,0 +1,7 @@
+name: "SampleApp"
+category: Interactive Apps
+subcategory: "Sample Subcategory"
+role: batch_connect
+description: |
+  This is a sample application description.
+

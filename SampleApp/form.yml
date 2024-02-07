@@ -1,0 +1,8 @@
+cluster: "hpcc"
+form:
+  - input_field
+attributes:
+  input_field:
+    widget: "text_field"
+    label: "Input Field"
+

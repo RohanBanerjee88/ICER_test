@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+# This file is the main run script!
+# This file is executed when it is time for your app to start.
+# It is NOT recommended to alter sections of this document
+# that you are not promted to work with!
+# This is to ensure that the operations in this file
+# work correctly.
+# It is highly recommended to put the following in this file:
+# - Put custom module load operations here
+# - Put in invoke code in your relevant section
+
+echo "Starting main script..."
+echo "Start Time - $(date)"
+
+#
+# Generic start tasks
+#
+
+#
+# Module load operations
+#
+
+# Clean the environment
+module purge
+
+# Here, we load all required modules specified in the form YAML file.
+# We only do this operation if the list of modules is not blank.
+# You should put any other dynamic module load operations AFTER this section.
+# There will be another comment block below denoting where to put custom module load code.
+
+<%- unless context.modules.blank? -%>
+
+# Load the required modules
+module load <%= context.modules %>
+
+<%- end -%>
+
+# Here, you should put any other module load operations you need
+
+# +==============================================+
+
+# ?[Put other module load operations here]?
+
+# +==============================================+
+
+# Display all loaded modules
+module list
+
+echo "Time after module load - $(date)"
+
+# Set working directory to the home directory
+
+cd "${HOME}"
+
+#
+# Invoking your application
+#
+
+# After this line, all module load operations are complete!
+# If your app is a VNC app, then all you need to do is define
+# some variables, and this template will take it from here.
+# If your app is NOT a VNC application,
+# then you will need to do some start operations here.
+
+# Below, is a function called 'start_app()'
+# You should define this method, and put any necessary start code within
+
+start_app() {
+
+    # +==============================================+
+
+    # ![Put any start code here!]!
+
+    # By default, we just run firefox
+    # TODO: Point firefox to OnDemand developer documentation
+
+    firefox
+
+    # +==============================================+
+
+}
+
+<% if context.is_vnc == 'true' -%>
+
+# This is a VNC application, configure the Xfce window manager:
+
+(
+  export SEND_256_COLORS_TO_REMOTE=1
+  export XDG_CONFIG_HOME="<%= session.staged_root.join("config") %>"
+  export XDG_DATA_HOME="<%= session.staged_root.join("share") %>"
+  export XDG_CACHE_HOME="$(mktemp -d)"
+  module restore
+  set -x
+  xfwm4 --compositor=off --daemon --sm-client-disable
+  xsetroot -solid "#D3D3D3"
+  xfsettingsd --sm-client-disable
+  xfce4-panel --sm-client-disable
+) &
+
+# Start the application:
+
+set -x
+start_app
+
+<% else -%>
+
+# This section is for non-vnc applications.
+# TODO: Add more stuff here
+
+# Finally, start the fuction:
+
+start_app
+
+<% end -%>

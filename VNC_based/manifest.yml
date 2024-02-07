@@ -1,0 +1,7 @@
+name: "SampleVNCApp"
+category: Interactive Apps
+subcategory: "Sample"
+role: batch_connect
+
+description: |
+  Sample VNC App Description

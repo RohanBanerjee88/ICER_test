@@ -1,0 +1,170 @@
+# This file defines all the attributes that your application needs to run!
+# Later on, when starting your app, you can reference these attributes
+# and use them to start your app the way the end user wants.
+# This file also defines how these attributes are shown to the end user
+# on the HTML configuration page.
+
+---
+cluster: "hpcc" # ?[We highly recommend keeping this value]?
+form:
+
+  # Below lie some generic options.
+  # Functionality for these options is built into this template!
+  # We HIGHLY recommend keeping these options and their configuration,
+  # as they are applicable to most apps.
+
+  - modules  # A list of modules that are to be automatically loaded
+  - is_vnc  # A value determining if we are a VNC app, be sure to set it down below!
+  - bc_num_hours  # The number of hours the user wants your app to run for
+  - bc_num_slots  # The number of slots your app will use, hardcoded
+  - num_cores  # The number of cores the user wants to dedicate to your app
+  - memory  # The amount of memory the user wants to dedicate to your app
+
+  # Below, you can add some of your own options!
+  # These can really be anything you think is important.
+  # Your options should be robust and highly configurable,
+  # but they should have good sensible defaults for users
+  # who don't want to fiddle around with settings.
+
+  # +==============================================+
+
+  # ?[Add your own form options]?
+
+  # +==============================================+
+
+  # Below lie advanced options, edit if you dare!
+  # These are pretty generic, and offer some addition options.
+  # You most likely don't have to touch these
+
+  - bc_email_on_started  # A checkbox determining if the user wants to be emailed when their app is ready
+  - advanced_options  # A check box toggling the visibility of advanced options
+  - node_type  # The node type the user wants
+  - num_gpus  # The number of GPUs the user wants
+  - num_tasks  # The number of tasks that user wants
+  - bc_account  # The account to use
+  - qos  # ????
+  - reservation  # SLURM reservation ID ???
+  - bc_vnc_resolution   # Resolution for the VNC instance
+attributes:
+
+  # Here, you can add definitions to the attributes you defined!
+  # It is highly recommended to do so,
+  # as it makes using the front end easier and can cut down on misconfiguration errors.
+
+  # BE SURE TO SPECIFY IF THIS APP IS A VNC APP OR NOT!
+  # This app will self-configure itself depending on the value of this parameter!
+  # As a reminder, a VNC is an app that will start on the HPC desktop.
+  # The user will then utilize a VNC client in the web browser to see and interact
+  # with the desktop, and your application you configured.
+  # If your app is not a VNC app,
+  # then set this value to 'false'!
+
+  # +==============================================+
+
+  is_vnc: true  # ![Specify if this app is VNC or not!]!
+
+  # +==============================================+
+
+  # Here you should specify the modules to be automatically loaded.
+  # This should be a string with space separated module names.
+  # These modules are passed directly to the module load command,
+  # so any names and syntax for module names apply here.
+  # For example, if you don't want to add any modules:
+  # modules: ""
+  # If you want to add one module:
+  # modules: "mod"
+  # If you want to add multiple modules:
+  # modules: "mod1 mod2 mod3"
+
+  # +==============================================+
+
+  modules: ""  # ?[Specify modules to auto-load]?
+
+  # Below, you should add the definitions to any attributes you have set!
+
+  # ?[Add your option definitions here]?
+
+  # +==============================================+
+
+  # Below lies the definitions for the default options.
+  # It is recommended not to alter these at all!
+  bc_num_hours:
+    help: |
+      Jobs shorter than four hours will schedule much faster
+  num_cores:
+    widget: "number_field"
+    label: "Number of cores per task"
+    value: 1
+    min: 0
+    max: 128
+    step: 1
+  memory:
+    widget: "text_field"
+    label: "Amount of memory"
+    help: |
+      E.g. 100GB or 500MB. 750MB per core if left blank.
+    pattern: "[0-9]+([gmtGMT][bB])?"
+  bc_num_slots: "1"
+  bc_vnc_resolution:
+    required: true
+  node_type:
+    widget: select
+    label: "Node type"
+    help: |
+      - **any** - (*1-128 cores*) Use any available node. This reduces the
+        wait time as there are no node requirements.
+      - **intel14** - (*1-20 cores*)
+      - **intel16** - (*1-28 cores*)
+      - **intel18** - (*1-40 cores*)
+      - **amd20** - (*1-128 cores*)
+    options:
+      - [
+          "any",     "any",
+          data-min-ppn: 1,
+          data-max-ppn: 128,
+        ]
+      - [
+          "intel14",     "intel14",
+          data-min-ppn: 1,
+          data-max-ppn: 20,
+        ]
+      - [
+          "intel16", "intel16",
+          data-min-ppn: 1,
+          data-max-ppn: 28,
+        ]
+      - [
+          "intel18",   "intel18",
+          data-min-ppn: 1,
+          data-max-ppn: 40,
+        ]
+      - [
+          "amd20", "amd20",
+          data-min-ppn: 1,
+          data-max-ppn: 128,
+        ]
+  advanced_options:
+    widget: "check_box"
+    label: "Advanced Options"
+    value: 0
+  num_gpus:
+    widget: "number_field"
+    label: "Number of GPUs"
+    value: 0
+    min: 0
+    max: 8
+    step: 1
+  num_tasks:
+    widget: "number_field"
+    label: "Number of tasks"
+    value: 0
+    min: 0
+  bc_account:
+    label: "SLURM Account"
+    help: "You can leave this blank to use your default account"
+  qos:
+    label: "SLURM QOS"
+    help: "You can leave this blank to use your default QOS"
+  reservation:
+    label: "SLURM Reservation"
+    help: "You can leave this blank if you don't have a reservation"

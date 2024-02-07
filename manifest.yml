@@ -1,0 +1,28 @@
+# This file describes some high level information about your app.
+# This includes the name, description, catagories, ect.
+
+---
+# +==============================================+
+
+name: "New App"  # Fill in the name of your app here!
+
+# +==============================================+
+
+category: Interactive Apps  # We HIGHLY recommend keeping this value!
+
+# +==============================================+
+
+subcategory: "Utility"  # Fill in the subcategory of your app here! 
+
+# +==============================================+
+
+role: batch_connect  # We HIGHLY recommend keeping this value!
+
+# +==============================================+
+# Below, fill in the description of your app.
+# This should be short and sweet.
+
+description: |
+  An amazing application for performing specific tasks
+
+# +==============================================+
